@@ -1,0 +1,91 @@
+---
+title: "Assignment 6 and 7"
+author: "Atharv Prashant Tungatkar"
+date: "2025-10-20"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+## Reading the dataset
+```{r}
+data<-read.csv("C:/Users/athar/OneDrive/Desktop/MBA Business Analytics/Visual Analytics/Files/siva.csv")
+head(data,10)
+```
+
+
+## Checking the data types of variables
+
+```{r}
+str(data)
+
+```
+For regression we only use the numerical variables.
+
+## Subsetting the data
+```{r}
+reg_data<-data[,c('Recom_mend_Siva','Staff_Courtesy','Speed_of_Service','Veh_Equip_Condition','Trans_Billing_as_Expected','Value_for_the_Money')]
+head(reg_data,10)
+```
+
+## Check for null values
+```{r}
+sum(is.na(reg_data))
+sapply(reg_data, function(x) sum(is.na(x)))
+```
+There are 7300 null values hence we clear the rows and then get the correlation matrix.
+
+
+
+```{r}
+df<-na.omit(reg_data)
+corr_matrix<-cor(df)
+```
+
+## Plot the correlaton visualization
+```{r}
+library(ggplot2)
+library(corrplot)
+
+col <- colorRampPalette(c("#BB4444", "#EE9988", "#FFFFFF", "#77AADD", "#4477AA" ))
+
+corrplot(corr_matrix)
+
+```
+
+## Creating the regression model
+```{r}
+model<-lm(Recom_mend_Siva ~ .,data=df)
+summary(model)
+
+```
+## Plotting beta coefficients and their distributions
+
+```{r}
+library(jtools)
+library(broom.mixed)
+plot_summs(model,
+           coefs = c("Staff Courtesy" = "Staff_Courtesy", "Service Speed" = "Speed_of_Service","Equipment Condition" = "Veh_Equip_Conditio","Billin as Expected"='Trans_Billing_as_Expected',"Value for Money"='Value_for_the_Money' ),
+           robust = TRUE, plot.distributions = TRUE, inner_ci_level = .8)
+
+```
+
+## Creating the clustering
+```{r}
+kmeans.result <- kmeans(df, 4)
+
+```
+
+## Plotting the clusters
+```{r}
+library(ggpubr)
+library(factoextra)
+ 
+fviz_cluster(kmeans.result, data = df,
+             palette = c("#2E9FDF", "#00AFBB", "#E7B800","#f14975"), 
+             geom = "point",
+             ellipse.type = "convex", 
+             ggtheme = theme_bw()
+)
+
+```

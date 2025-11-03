@@ -1,0 +1,113 @@
+---
+title: 'Individual Assignment 3: Exploratory Data Analysis and Visualization'
+author: "Atharv Prashant Tungatkar"
+date: "2025-10-26"
+output: html_document
+---
+
+Reading libraries and datasets
+
+```{r}
+library(ggplot2)
+library(dplyr)
+
+data<-read.csv("C:/Users/athar/OneDrive/Desktop/MBA Business Analytics/Visual Analytics/Files/marketing_campaign.csv")
+```
+
+Displaying data
+
+```{r}
+head(data,5)
+str(data)
+```
+# Univarite Non Graphical
+
+## Categorical variable
+
+Education
+```{r}
+tb<-table(data$Education)
+tb
+
+```
+The analysis uncover that majority of the customers have completed Graduation.
+
+## Quantitatrive Variable
+
+Recency
+```{r}
+library(psych)
+describe(data$Recency)
+
+```
+The basic analysis suggest that Recency is averaged around 49 and has a evenly shaped bell curve as skewness is zero. The data is also evenly spread as there are less outlier because kurtosis is less than 0.
+
+
+# Univariate Graphical
+
+## Categorical Variable
+
+I will be using the number of teen homes as a categorical variable to plot a bar graph.
+```{r}
+library(ggplot2)
+ggplot(data,aes(x=factor(Teenhome)))+geom_bar(fill="lightblue")
+
+```
+From the graph it is evident that majority of the customers don't have a teen kid in their household.
+
+## Quantitative Variable
+
+I will be plotting the pl which is a smoothed version of histogram on the income variable to understand the distribution of inclome
+```{r}
+ggplot(data,aes(x=Income)) +
+  geom_density(fill="lightblue",alpha=0.6) +
+  labs(title = "Distribution of Income",x="Income",y="Density") +
+  xlim(0, 100000)
+
+```
+The graph shows that the distribution of income is bimodal with an average income of 50000.
+
+
+# Multivariate Non Graphical
+
+## Categorical Variables
+
+Education and marital status are interesting variables to plot a cross table/
+```{r}
+ctable<-table(data$Education,data$Marital_Status)
+ctable
+```
+Highest number of customers are from the graduate married category.The pattern shows that majority of customer chunk are from the education section of graduation and above with married and together being the highest contributors across those categories.
+
+## Quantitative Variables
+
+Lets get a correlation matrix for all the categorical variables.
+```{r}
+num_variables=data[c('Kidhome','Teenhome','Recency','MntWines','MntMeatProducts','MntFishProducts','MntSweetProducts','MntGoldProds','NumDealsPurchases','NumWebPurchases','NumWebVisitsMonth')]
+cor_matrix <- cor(num_variables, use = "complete.obs", method = "pearson")
+cor_matrix
+```
+The analysis gives a glimpse of how the variables are related to each other. It is observed that the quantitative variables of Mnt purchased have the highet correlation among which MntFishProducts and MntSweetProducts have the highest correlation suggesting that customers who buy more fish tend to but more sweets.
+
+# Multivariate Graphical
+
+## Categorical Variables
+
+We examine whether the Kidhome and education has any relation/pattern
+```{r}
+t1<-table(data$Kidhome,data$Education)
+barplot(t1,main="Educaton Vs Kids",legend=rownames(t1),beside=TRUE,col=c("lightblue","lightyellow","lightgreen"))
+
+```
+The pattern is same among all the categories except for Basic education where tha customers with one kid are greater than other two categories.
+
+## Quantitative Variables
+
+Now as the correlation analysis indicated that the sweets and fish purchases are correlated lets examine it with respect to teens home.
+```{r}
+ggplot(data, aes(x = MntSweetProducts, y = MntFishProducts, size = Teenhome)) +
+  geom_point(alpha = 0.6, color = "darkblue") +
+  labs(title = "Bubble Plot", x = "x1", y = "x2", size = "x3")
+```
+There is a positive correlation between Sweet and Fish purchases but the teens home have a random pattern not showing any relationship with the purchases.
+

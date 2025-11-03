@@ -1,0 +1,529 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={AtharvPrashantTungatkar\_Individual VisualAnalytics Assignment 5},
+  pdfauthor={Atharv Prashant Tungatkar},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{AtharvPrashantTungatkar\_Individual VisualAnalytics Assignment 5}
+\author{Atharv Prashant Tungatkar}
+\date{2025-10-13}
+
+\begin{document}
+\maketitle
+
+\section{Read Dataset}\label{read-dataset}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{siva}\OtherTok{=}\FunctionTok{read.csv}\NormalTok{(}\StringTok{"C:/Users/athar/OneDrive/Desktop/MBA Business Analytics/Visual Analytics/Files/siva.csv"}\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(siva)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   xgra_n1clb_nbr Siva_Rental_Number rent_area_loc Date_of_Survey Day_of_Week
+## 1          51407              67041           156      5/18/2011   Wednesday
+## 2          23460              56084           204       2/5/2011    Saturday
+## 3          53417              70279           181      6/14/2011     Tuesday
+## 4          14382              15105          1515       1/4/2010      Monday
+## 5          40539              49797           259      12/1/2010   Wednesday
+## 6          53945              71102           165      6/29/2011   Wednesday
+##       Time Survey_Type Purpose_of_Rental Recom_mend_Siva Staff_Courtesy
+## 1  7:48:30 SV Web Sol.              Bus.               8              9
+## 2 22:06:37 SV Web Sol.     Leis. / Pers.               8              8
+## 3  5:35:48 SV Web Sol.              Bus.               8              7
+## 4 23:58:56 SV Web Sol.     Leis. / Pers.               7              8
+## 5  8:24:39 SV Web Sol.     Leis. / Pers.               9              9
+## 6  5:34:06 SV Web Sol.              Bus.               9              9
+##   Speed_of_Service Veh_Equip_Condition Trans_Billing_as_Expected
+## 1                8                   9                         9
+## 2                8                   5                         8
+## 3                8                   8                         8
+## 4                7                   8                         8
+## 5                9                   9                         9
+## 6                9                   9                         9
+##   Value_for_the_Money                     Area                  loc_nm
+## 1                   9 01602 - LOVE FIELD AP TX       DALLAS LOVE FIELD
+## 2                   7   07286 - VALLEJO CA OAP             VALLEJO HLE
+## 3                   8   01850 - RICHMOND VA AP        RICHMOND INTL AP
+## 4                   8      05743 - PICO CA OAP                PICO HLE
+## 5                   9   07787 - NEWPORT RI OAP             NEWPORT HLE
+## 6                   9    01450 - ATLANTA AP GA ATLANTA-HARTSFIELD INTL
+##        ga_region_desc xgra_ckot_ts xgra_ckin_ts xgra_vclass_reserv
+## 1    SOUTHWEST REGION    5/15/2011    5/17/2011                  C
+## 2      WESTERN REGION    1/31/2011     2/3/2011                  A
+## 3 MID ATLANTIC REGION    6/12/2011    6/13/2011                  F
+## 4      WESTERN REGION   12/23/2009     1/3/2010                  D
+## 5    NORTHEAST REGION   11/29/2010   11/30/2010                  F
+## 6    SOUTHEAST REGION    6/20/2011    6/26/2011                  R
+##   xgra_veh_class rent_loc_type cust_tier_code booking_channel_code
+## 1             Q4            AP             FG             SIVA.COM
+## 2              B        OFF AP             N1             SIVA.COM
+## 3             YF            AP             RG             SIVA.COM
+## 4             YF        OFF AP             RG             SIVA.COM
+## 5              A        OFF AP             RG             SIVA.COM
+## 6             YR            AP             RG                 800#
+##   col34_total_charges col38_currency Total_charge_USD Survey_checkout_diff
+## 1              247.29            USD           247.29                    2
+## 2              128.04            USD           128.04                    3
+## 3               75.85            USD            75.85                    2
+## 4              468.51            USD           468.51                    2
+## 5               42.84            USD            42.84                    2
+## 6              107.92            USD           107.92                    4
+##   booking_channel_dummy
+## 1                     1
+## 2                     1
+## 3                     1
+## 4                     1
+## 5                     1
+## 6                     0
+\end{verbatim}
+
+\section{Import all the necessary
+libraries}\label{import-all-the-necessary-libraries}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'dplyr' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\section{Part 1 : Subsetting}\label{part-1-subsetting}
+
+\subsection{SUBSET 1:}\label{subset-1}
+
+\subsubsection{Filtering out people who gave recommendation greater than
+or equal to 7 and their respective bill charges and rental
+location.}\label{filtering-out-people-who-gave-recommendation-greater-than-or-equal-to-7-and-their-respective-bill-charges-and-rental-location.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{subset1 }\OtherTok{\textless{}{-}}\NormalTok{ siva }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Recom\_mend\_Siva }\SpecialCharTok{\textgreater{}=} \DecValTok{7}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(Siva\_Rental\_Number, Recom\_mend\_Siva, rent\_area\_loc, Total\_charge\_USD)}
+\FunctionTok{head}\NormalTok{(subset1,}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Siva_Rental_Number Recom_mend_Siva rent_area_loc Total_charge_USD
+## 1               67041               8           156           247.29
+## 2               56084               8           204           128.04
+## 3               70279               8           181            75.85
+## 4               15105               7          1515           468.51
+## 5               49797               9           259            42.84
+## 6               71102               9           165           107.92
+## 7               43104               9           177           224.68
+## 8               33940               9          2167            45.08
+## 9               40004               9           140           130.10
+## 10              36540               9           160           259.35
+\end{verbatim}
+
+\subsection{SUBSET 2}\label{subset-2}
+
+\subsubsection{Getting people who were not billed properly to get areas
+which are more
+problematic.}\label{getting-people-who-were-not-billed-properly-to-get-areas-which-are-more-problematic.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{subset2 }\OtherTok{\textless{}{-}}\NormalTok{ siva }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Trans\_Billing\_as\_Expected }\SpecialCharTok{\textless{}=} \DecValTok{4}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{( Siva\_Rental\_Number, Trans\_Billing\_as\_Expected, rent\_area\_loc, Value\_for\_the\_Money, Total\_charge\_USD)}
+\FunctionTok{head}\NormalTok{(subset2, }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Siva_Rental_Number Trans_Billing_as_Expected rent_area_loc
+## 1               12297                         0           276
+## 2               61154                         0           161
+## 3               76767                         1           605
+## 4               52242                         1           161
+## 5               19902                         3           553
+## 6               14029                         0           160
+## 7               39634                         1           930
+## 8                6706                         1           161
+## 9               18878                         4          1713
+## 10               5395                         3           261
+##    Value_for_the_Money Total_charge_USD
+## 1                    0           162.22
+## 2                    7            62.85
+## 3                    0           236.08
+## 4                    1           307.80
+## 5                    6           110.45
+## 6                    5           271.65
+## 7                    4           524.86
+## 8                    3            78.35
+## 9                    5           156.61
+## 10                   4           346.58
+\end{verbatim}
+
+\subsection{SUBSET 3}\label{subset-3}
+
+\subsubsection{Getting Average sales by
+weekday}\label{getting-average-sales-by-weekday}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{subset3}\OtherTok{\textless{}{-}}\NormalTok{ siva }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Day\_of\_Week)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean\_day=}\FunctionTok{mean}\NormalTok{(Total\_charge\_USD))}
+\FunctionTok{head}\NormalTok{(subset3,}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 7 x 2
+##   Day_of_Week mean_day
+##   <chr>          <dbl>
+## 1 Friday          246.
+## 2 Monday          218.
+## 3 Saturday        256.
+## 4 Sunday          227.
+## 5 Thursday        211.
+## 6 Tuesday         226.
+## 7 Wednesday       211.
+\end{verbatim}
+
+\subsection{SUBSET 4}\label{subset-4}
+
+\subsubsection{Lets determine if there are significant speed differences
+on different days for different
+purposes.}\label{lets-determine-if-there-are-significant-speed-differences-on-different-days-for-different-purposes.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{subset4}\OtherTok{\textless{}{-}}\NormalTok{siva}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Purpose\_of\_Rental,Day\_of\_Week)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{speed=}\FunctionTok{mean}\NormalTok{(Speed\_of\_Service,}\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'Purpose_of_Rental'. You can override using
+## the `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(subset4,}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 3
+## # Groups:   Purpose_of_Rental [2]
+##    Purpose_of_Rental   Day_of_Week speed
+##    <chr>               <chr>       <dbl>
+##  1 Bus.                Friday       7.58
+##  2 Bus.                Monday       7.61
+##  3 Bus.                Saturday     7.54
+##  4 Bus.                Sunday       7.53
+##  5 Bus.                Thursday     7.54
+##  6 Bus.                Tuesday      7.54
+##  7 Bus.                Wednesday    7.55
+##  8 Ins. Rep. or Loaner Friday       7.33
+##  9 Ins. Rep. or Loaner Monday       7.53
+## 10 Ins. Rep. or Loaner Saturday     6.46
+\end{verbatim}
+
+\subsection{SUBSET 5}\label{subset-5}
+
+\subsubsection{Booking done using
+SIVA.COM}\label{booking-done-using-siva.com}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{subset5}\OtherTok{\textless{}{-}}\NormalTok{siva}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(booking\_channel\_code}\SpecialCharTok{==}\StringTok{"SIVA.COM"}\NormalTok{)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(Recom\_mend\_Siva,rent\_area\_loc,booking\_channel\_code,Purpose\_of\_Rental,Value\_for\_the\_Money)}
+\FunctionTok{head}\NormalTok{(subset5,}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Recom_mend_Siva rent_area_loc booking_channel_code Purpose_of_Rental
+## 1                8           156             SIVA.COM              Bus.
+## 2                8           204             SIVA.COM     Leis. / Pers.
+## 3                8           181             SIVA.COM              Bus.
+## 4                7          1515             SIVA.COM     Leis. / Pers.
+## 5                9           259             SIVA.COM     Leis. / Pers.
+## 6                9          2167             SIVA.COM              Bus.
+## 7                5           953             SIVA.COM              Bus.
+## 8                9           140             SIVA.COM     Leis. / Pers.
+## 9                9           234             SIVA.COM     Leis. / Pers.
+## 10               9           482             SIVA.COM     Leis. / Pers.
+##    Value_for_the_Money
+## 1                    9
+## 2                    7
+## 3                    8
+## 4                    8
+## 5                    9
+## 6                    7
+## 7                    7
+## 8                    9
+## 9                    8
+## 10                   8
+\end{verbatim}
+
+\section{Part 2 : Visualizations}\label{part-2-visualizations}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'ggplot2' was built under R version 4.4.3
+\end{verbatim}
+
+\subsection{Plot 1}\label{plot-1}
+
+\subsubsection{Daywise sales}\label{daywise-sales}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{day\_wise}\OtherTok{\textless{}{-}}\NormalTok{ siva }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Day\_of\_Week)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean\_day=}\FunctionTok{mean}\NormalTok{(Total\_charge\_USD))}
+\NormalTok{day\_wise}\SpecialCharTok{$}\NormalTok{Day\_of\_Week }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(day\_wise}\SpecialCharTok{$}\NormalTok{Day\_of\_Week,}
+                               \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Monday"}\NormalTok{, }\StringTok{"Tuesday"}\NormalTok{, }\StringTok{"Wednesday"}\NormalTok{, }
+                                          \StringTok{"Thursday"}\NormalTok{, }\StringTok{"Friday"}\NormalTok{, }\StringTok{"Saturday"}\NormalTok{, }\StringTok{"Sunday"}\NormalTok{))}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{day\_wise,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Day\_of\_Week,}\AttributeTok{y=}\NormalTok{mean\_day))}\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{fill =} \StringTok{"skyblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Average Total Charge by Day of Week"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Day of Week"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Average Charge (USD)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{AtharvPrashantTungatkar_Individual-Visual-Analytics-Assignment-5_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+The rentals occur mostly on weekends especially Fridays and Saturdays.
+
+\subsection{Plot 2}\label{plot-2}
+
+\subsubsection{Heatmap of Correlation between
+Variables}\label{heatmap-of-correlation-between-variables}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(corrplot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'corrplot' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+## corrplot 0.95 loaded
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat }\OtherTok{\textless{}{-}}\NormalTok{ siva[, }\FunctionTok{c}\NormalTok{(}\StringTok{"Recom\_mend\_Siva"}\NormalTok{, }\StringTok{"Speed\_of\_Service"}\NormalTok{, }\StringTok{"Value\_for\_the\_Money"}\NormalTok{, }\StringTok{"Total\_charge\_USD"}\NormalTok{,}\StringTok{"Staff\_Courtesy"}\NormalTok{,}\StringTok{"Veh\_Equip\_Condition"}\NormalTok{)]}
+\NormalTok{corr\_matrix }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(dat, }\AttributeTok{use =} \StringTok{"complete.obs"}\NormalTok{)}
+\NormalTok{col }\OtherTok{\textless{}{-}} \FunctionTok{colorRampPalette}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"\#BB4444"}\NormalTok{, }\StringTok{"\#EE9988"}\NormalTok{, }\StringTok{"\#FFFFFF"}\NormalTok{, }\StringTok{"\#77AADD"}\NormalTok{, }\StringTok{"\#4477AA"}\NormalTok{ ))}
+
+\FunctionTok{corrplot}\NormalTok{(corr\_matrix)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{AtharvPrashantTungatkar_Individual-Visual-Analytics-Assignment-5_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+The plot reveals key information. The price is not more correlated with
+the services and even the recommendation doesn't depend on the price.
+Majority of recommendations are positively related with speed of
+service, staff courtesy and equipment condition.
+
+\subsection{Plot 3}\label{plot-3}
+
+\subsubsection{Speed of serviceby location
+type}\label{speed-of-serviceby-location-type}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{siva }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(rent\_loc\_type) }\SpecialCharTok{\&}\NormalTok{ rent\_loc\_type }\SpecialCharTok{!=} \StringTok{""} \SpecialCharTok{\&}\NormalTok{ rent\_loc\_type }\SpecialCharTok{!=} \StringTok{"NA"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(rent\_loc\_type) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{avg\_speed =} \FunctionTok{mean}\NormalTok{(Speed\_of\_Service, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ rent\_loc\_type, }\AttributeTok{y =}\NormalTok{ avg\_speed, }\AttributeTok{fill =}\NormalTok{ rent\_loc\_type)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Average Speed of Service by Location Type"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Location Type"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Average Speed"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{AtharvPrashantTungatkar_Individual-Visual-Analytics-Assignment-5_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+It was against my assumption that the off airport locations had a
+slightly higher speed.
+
+\subsection{Plot 4}\label{plot-4}
+
+\subsubsection{Distribiution of Total
+Charge}\label{distribiution-of-total-charge}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(siva, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Total\_charge\_USD)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{50}\NormalTok{, }\AttributeTok{fill =} \StringTok{"skyblue"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Distribution of Total Charges (USD)"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Total Charge (USD)"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Frequency"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{coord\_cartesian}\NormalTok{(}\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1250}\NormalTok{)) }\SpecialCharTok{+}   \CommentTok{\# Zoom in, keeps data}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{AtharvPrashantTungatkar_Individual-Visual-Analytics-Assignment-5_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+The distribuition is unimodal and right skewed hence there are less
+trips that amount for more cost.
+
+\subsection{Plot 5}\label{plot-5}
+
+\subsubsection{Box plot of Purpose of visit according to total
+charges}\label{box-plot-of-purpose-of-visit-according-to-total-charges}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(siva, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Purpose\_of\_Rental, }\AttributeTok{y =}\NormalTok{Recom\_mend\_Siva)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill =} \StringTok{"salmon"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Purpose Vs Recommendation"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Purpose"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Recommendation"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{AtharvPrashantTungatkar_Individual-Visual-Analytics-Assignment-5_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+Insurance replacement/loaners are more likely to recommend SIVA than
+other two categories.
+
+\end{document}
