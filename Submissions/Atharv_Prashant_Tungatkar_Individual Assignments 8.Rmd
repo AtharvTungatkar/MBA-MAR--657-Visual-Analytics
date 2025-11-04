@@ -1,0 +1,113 @@
+---
+title: 'Individual Assignment 8: Maps and Interactive Graph'
+author: "Atharv Prashant Tungatkar"
+date: "2025-11-04"
+output: html_document
+---
+Importing Libraries that are generally required
+```{r}
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(xts)
+library(dygraphs)
+library(maps)
+library(gapminder)
+library(usmap)
+library(tibble)
+library(maps)
+library(mapproj)
+```
+
+# Question 1
+Loading the dataset using the given code
+```{r}
+data("statepop")
+
+## Make the state names lower-cased
+statepop$region <- tolower(statepop$full)
+library(ggplot2)
+states_map <- map_data("state")
+## Merge
+population_map <- merge(states_map, statepop, by= "region", all.x=T)
+
+```
+
+
+Plotting Map with the population of 2022 for states.
+```{r}
+population_states<-ggplot(population_map, aes(x = long, y = lat, group = group, fill = pop_2022)) +
+              geom_polygon(colour = "white") 
+population_states
+
+```
+# Question 2
+
+Loading Dataset
+```{r}
+marketing_data<-read.csv("E:\\MBA-MAR--657-Visual-Analytics\\Datasets\\marketing_campaign.csv")
+head(marketing_data,2)
+
+```
+
+## Interactive Graph 1
+Lets first examine the relationship between spending on fish products vs spending on sweet across different education levels with number of store purchases as size.
+```{r}
+sweet_vs_fish_plot <- plot_ly(
+  marketing_data,
+  x = ~MntSweetProducts,
+  y = ~MntFishProducts,
+  color = ~Education,           
+  size = ~NumStorePurchases,     
+  type = 'scatter',
+  mode = 'markers',
+  hoverinfo = 'text',
+  text = ~paste(
+    "Sweet Spend: $", MntSweetProducts,
+    "<br>Fish Spend: $", MntFishProducts,
+    "<br>Store Purchases: ", NumStorePurchases,
+    "<br>Education:", Education
+  )
+) %>%
+  layout(
+    title = "Sweet vs Fish Product Spending by Education and Marital Status",
+    xaxis = list(title = "Spending on Sweet Products (USD)"),
+    yaxis = list(title = "Spending on Fish Products (USD)"),
+    legend = list(title = list(text='Education'))
+  )
+
+sweet_vs_fish_plot
+
+```
+It can be seen that people having a phd are more likely to spend less on sweets and fish.
+
+
+## Interactive Graph 2
+
+Lets examine the relationship between average spending across average income for different education levels at different ages
+```{r}
+marketing_campaign <- marketing_data %>%
+  mutate(Age = 2025 - Year_Birth,
+         AgeGroup = cut(Age, breaks = c(18,30,40,50,60,70,100),
+                        labels = c("18-30","31-40","41-50","51-60","61-70","70+")),
+         Total_Spend = MntWines + MntFruits + MntMeatProducts +
+                       MntFishProducts + MntSweetProducts + MntGoldProds)
+
+edu_spend <- marketing_campaign %>%
+  group_by(Education, AgeGroup) %>%
+  summarise(Avg_Spend = mean(Total_Spend, na.rm = TRUE),
+            Avg_Income = mean(Income, na.rm = TRUE),
+            .groups = 'drop')
+
+anim_spend <- ggplot(edu_spend, aes(x = Avg_Income, y = Avg_Spend, 
+                                    color = Education,
+                                    frame = AgeGroup)) +
+  geom_point(alpha =2) +
+  labs(title = "Animated Average Spending by Education Level and Age Group",
+       x = "Average Income (USD)", y = "Average Spending (USD)")
+
+anim_spend <- ggplotly(anim_spend)
+
+anim_spend
+
+```
